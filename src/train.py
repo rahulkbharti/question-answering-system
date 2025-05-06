@@ -43,6 +43,11 @@ def train_model(model, dataloader, optimizer,scheduler, rank,sampler,args=None,e
         ppx = torch.exp(loss.detach())
         train_perplexity.append(ppx)
         
+        tqdm_bar.set_postfix({
+           'loss': f"{loss.item():.4f}",
+           'ppx': f"{ppx.item():.2f}" if not math.isinf(ppx.item()) else "inf"
+        }) 
+        
         # if rank == 0:  # Log only from the main process to avoid redundant logging
         #     print(f"GPU {rank} - Batch {batch_idx}/{len(dataloader)} - Loss: {loss.item()}")
            
