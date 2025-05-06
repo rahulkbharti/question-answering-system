@@ -1,0 +1,12 @@
+data_path: "/kaggle/input/train_data.pkl"
+model_name: "facebook/bart-large"
+batch_size: 4
+num_epochs: 1
+learning_rate: 5e-5
+max_length: 512
+seed: 783435
+output_dir: "./output"
+log_dir: "./logs"
+checkpoint_dir: "./checkpoints"
+checkpoint_interval: 1000
+warmup_ratio: 0.1
