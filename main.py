@@ -3,8 +3,8 @@ import torch
 import argparse
 import torch.multiprocessing as mp
 
-from modules.utils import set_seed, open_config_file
-from modules.train import train
+from src.utils import set_seed, open_config_file
+from src.train import train
 
 def main():
     # Set up argument parser

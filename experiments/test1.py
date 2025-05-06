@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import DataLoader
-from modules.dataset import PersonaDataset, CollateFn, StateTrackingDistributedSampler
-from modules.utils import load_data
+from src.dataset import PersonaDataset, CollateFn, StateTrackingDistributedSampler
+from src.utils import load_data
 import os
 from tqdm import tqdm
 

@@ -2,7 +2,6 @@ import os
 import torch
 from transformers import BartTokenizer, BartForConditionalGeneration
 
-
 file_path = os.path.join('pretrained_models', 'model.pth')
 
 # 1. Load tokenizer with special tokens

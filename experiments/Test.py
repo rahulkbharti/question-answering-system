@@ -1,8 +1,8 @@
-from modules.utils import load_data
+from src.utils import load_data
 import pickle
 import os
 from tqdm.auto import tqdm
-from modules.dataset import PersonaDataset,CollateFn,StateTrackingDistributedSampler
+from src.dataset import PersonaDataset,CollateFn,StateTrackingDistributedSampler
 from torch.utils.data import DataLoader
 
 file_path = os.path.join('data', 'train_data_name.pkl')
