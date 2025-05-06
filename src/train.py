@@ -16,8 +16,6 @@ from src.distributed_training import setup, cleanup
 from src.dataset import PersonaDataset, CollateFn, StateTrackingDistributedSampler
 
 
-
-
 # ==== Training Loop ====
 def train_model(model, dataloader, optimizer,scheduler, rank,sampler,args=None,epoch=0):
     # Set the model to training mode
@@ -53,7 +51,7 @@ def train_model(model, dataloader, optimizer,scheduler, rank,sampler,args=None,e
            
 
         # ==== Checkpoint saving logic ====
-        if (batch_idx + 1) % args.checkpoint_interval == 0:
+        if rank == 0 and (batch_idx + 1) % args.checkpoint_interval == 0:
             latest_path = f"./model_latest_gpu{rank}.pt"
             # previous_path = f"{args.checkpoint_dir}/model_previous_gpu{rank}.pt"
 

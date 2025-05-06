@@ -2,27 +2,30 @@ import os
 import torch
 from transformers import BartTokenizer, BartForConditionalGeneration
 
-file_path = os.path.join('pretrained_models', 'model.pth')
-
-# 1. Load tokenizer with special tokens
+# ==== 1. Load tokenizer with special tokens ====
 tokenizer = BartTokenizer.from_pretrained("facebook/bart-large")
 tokenizer.add_special_tokens({
     'additional_special_tokens': ['<query>', '<response>', '<latent>', '<persona>']
 })
 
+# ==== 2. Load model ====
 model = BartForConditionalGeneration.from_pretrained("facebook/bart-large")
 model.resize_token_embeddings(len(tokenizer))
 
-# 2. Load checkpoint
+# ==== 3. Load checkpoint from DDP-trained model ====
+file_path = os.path.join('pretrained_models', 'model.pth')
 checkpoint = torch.load(file_path, map_location="cpu")
-model.load_state_dict(checkpoint) ## Check Here How You Stored the Model Weightss
 
-# 3. Set device and eval mode
+# Remove 'module.' prefix if model was trained with DDP
+new_state_dict = {k.replace("module.", ""): v for k, v in checkpoint['model_state_dict'].items()}
+model.load_state_dict(new_state_dict)
+
+# ==== 4. Set device and eval mode ====
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 model.eval()
 
-# 4. Chat loop with special tokens
+# ==== 5. Chat loop with persona context ====
 def chat_with_persona(model, tokenizer, device):
     print("Start chatting! Type 'exit' to stop.\n")
 
@@ -73,4 +76,5 @@ def chat_with_persona(model, tokenizer, device):
         context += f" {response_tagged}"
         print("_" * 50)
 
+# ==== 6. Start chat ====
 chat_with_persona(model, tokenizer, device)
