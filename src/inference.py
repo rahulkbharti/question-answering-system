@@ -15,6 +15,8 @@ model.resize_token_embeddings(len(tokenizer))
 
 # 2. Load checkpoint
 checkpoint = torch.load(file_path, map_location="cpu")
+# state_dict = {k.replace('module.', ''): v 
+#                       for k, v in checkpoint['model_state_dict'].items()}
 model.load_state_dict(checkpoint) ## Check Here How You Stored the Model Weightss
 
 # 3. Set device and eval mode

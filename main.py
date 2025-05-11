@@ -19,6 +19,7 @@ def main():
         config = {}
 
     parser.add_argument('--data_path', type=str, default=config.get('data_path', "/kaggle/input/train_data.pkl"), help='Path to the training data')
+    parser.add_argument('--validation_path', type=str, default=config.get('validation_path', "/kaggle/input/train_data.pkl"), help='Path to the training data')
     parser.add_argument('--model_name', type=str, default=config.get('model_name', "facebook/bart-large"), help='Model name or path')
     parser.add_argument('--batch_size', type=int, default=config.get('batch_size', 8), help='Batch size for training')
     parser.add_argument('--num_epochs', type=int, default=config.get('num_epochs', 1), help='Number of epochs for training')

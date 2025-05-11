@@ -9,3 +9,7 @@
 ```bash
    !python -m modules.inference 
 ```
+
+!python -m main --data_path=/kaggle/input/synthetic-personachat/valid.pkl --validation_path=/kaggle/input/synthetic-personachat/valid.pkl --learning_rate=1e-5
+
+
